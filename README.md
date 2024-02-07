@@ -59,6 +59,7 @@ In terms of technical constraints :
 - [ ] The application state should be stored in a `SQLite`, `PostgreSQL` or `MySQL` database.
 - [ ] The frontend and the backend should communicate using a basic CRUD API.
 - [ ] The app is styled with a few CSS rules, and should have a simple, usable UX (no time for fancy design stuff)
+- [ ] The app is using some icons and images that are all available in the assets directory.
 - [ ] There should be a small `README.md` file with the instructions needed to run the code locally
 
 **Please note that this shouldn't be a multi-user application**. It does not need any kind of user management.
