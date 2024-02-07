@@ -54,8 +54,8 @@ In terms of technical constraints :
 - [ ] The whole codebase should be contained in a single repository available on GitHub, which should be a fork 
       of this repository
 - [ ] The end result should be a single-page application
-- [ ] `Javascript`, `React.js` v17+, `Bootstrap` v4.6+ should be used for the frontend. you can use `create-react-app` for quick start.
-- [ ] `PHP` v8+, `Laravel` v10 should be used for the backend. You can use a Laravel starter kit for quick start.
+- [ ] `Javascript`, `React.js v17.0+`, `Bootstrap v4.6+` should be used for the frontend. you can use `create-react-app` for quick start.
+- [ ] `PHP v8.0+`, `Laravel v10` should be used for the backend. You can use a Laravel starter kit for quick start.
 - [ ] The application state should be stored in a `SQLite`, `PostgreSQL` or `MySQL` database.
 - [ ] The frontend and the backend should communicate using a basic CRUD API.
 - [ ] The app is styled with a few CSS rules, and should have a simple, usable UX (no time for fancy design stuff)
