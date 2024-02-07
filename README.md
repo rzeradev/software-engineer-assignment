@@ -14,7 +14,7 @@ The goal is to build a small functional modern web application.
 
 This application will allow a companie's hiring team to easily have access to candidates' dispostion.
 
-Figma link here:
+Figma link here: https://www.figma.com/file/WyM4lR9Ww9XjN1z13p9fO8/Eng-Test-Mock-2024?type=design&node-id=0-1&mode=design&t=sXCXShboiPqz6lRb-0
 
 The application has one main model : `Candidate`. A `Candidate` has the following properties:
 
