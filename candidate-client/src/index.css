@@ -1,0 +1,29 @@
+.bg-dark {
+    background-color: #213d55 !important;
+}
+
+.table td,
+.table th {
+    border-left: none;
+    border-right: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.dropdown {
+    position: static;
+}
+
+.table-responsive {
+    overflow-y: visible !important;
+}
+
+.dropdown-hover:hover {
+    color: black !important;
+}
