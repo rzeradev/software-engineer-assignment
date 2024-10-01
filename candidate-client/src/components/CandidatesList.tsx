@@ -52,6 +52,7 @@ function CandidatesList() {
     );
     const [totalItems, setTotalItems] = useState<number>(0);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [initialized, setInitialized] = useState(false);
 
     const updateSearchParams = useCallback(
         (newParams: Record<string, string | number>) => {
@@ -81,8 +82,6 @@ function CandidatesList() {
                 if (!sort) sort = "candidate";
                 if (!order) order = "asc";
 
-                updateSearchParams({ perPage, page, sort, order });
-
                 const response: AxiosResponse = await apiService.get<{
                     data: Candidate[];
                 }>(
@@ -97,12 +96,25 @@ function CandidatesList() {
                 toast.error("An error occurred while fetching candidates");
             }
         },
-        [updateSearchParams],
+        [],
     );
 
     useEffect(() => {
-        fetchCandidates(Object.fromEntries(searchParams.entries()));
-    }, [searchParams, fetchCandidates]);
+        if (!initialized) {
+            const paramsToUpdate: Record<string, string> = {};
+            if (!searchParams.get("perPage")) paramsToUpdate.perPage = "10";
+            if (!searchParams.get("page")) paramsToUpdate.page = "1";
+            if (!searchParams.get("sort")) paramsToUpdate.sort = "candidate";
+            if (!searchParams.get("order")) paramsToUpdate.order = "asc";
+
+            if (Object.keys(paramsToUpdate).length > 0) {
+                updateSearchParams(paramsToUpdate);
+            }
+            setInitialized(true);
+        } else {
+            fetchCandidates(Object.fromEntries(searchParams.entries()));
+        }
+    }, [searchParams, initialized, updateSearchParams, fetchCandidates]);
 
     const renderBadge = (status: string) => {
         switch (status) {
@@ -255,7 +267,9 @@ function CandidatesList() {
                                     >
                                         Candidate created
                                         <img
-                                            src={getSortIcon("candidate_created")}
+                                            src={getSortIcon(
+                                                "candidate_created",
+                                            )}
                                             alt="sort"
                                             className="ml-2"
                                         />
@@ -270,7 +284,9 @@ function CandidatesList() {
                                     >
                                         Disposition created
                                         <img
-                                            src={getSortIcon("disposition_created")}
+                                            src={getSortIcon(
+                                                "disposition_created",
+                                            )}
                                             alt="sort"
                                             className="ml-2"
                                         />
