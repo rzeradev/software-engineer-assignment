@@ -6,13 +6,15 @@
         "module": "ESNext",
         "skipLibCheck": true,
 
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
         "jsx": "react-jsx",
+
+        /* Bundler mode */
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "noEmit": true,
+
+        /* Module import behavior */
+        "allowSyntheticDefaultImports": true, // Enable synthetic default imports
 
         /* Linting */
         "strict": true,
