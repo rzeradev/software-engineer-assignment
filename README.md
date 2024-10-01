@@ -67,6 +67,12 @@ docker compose exec app php artisan test
 After running the run.sh file, you can access the application on `http://localhost:3000`
 api will be available on `http://localhost:8080`
 
+After you are done with the application, you can stop the containers by running the following command in the root directory of the project.
+
+```bash
+docker compose down
+```
+
 ## Assignment tasks
 
 ### Must-have
