@@ -2,7 +2,7 @@
 cp candidate-api/.env.example candidate-api/.env
 
 # Start the containers
-docker compose up -d
+docker compose up -d --build
 
 # Run migrations and install dependencies
 docker compose exec app composer install

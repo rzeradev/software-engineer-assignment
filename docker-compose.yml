@@ -62,6 +62,19 @@ services:
         networks:
             - sparkhire_challenge
 
+    client:
+        container_name: candidate_client
+        image: candidate_client
+        build:
+            context: ./candidate-client
+            dockerfile: Dockerfile
+            target: deploy-node
+        ports:
+            - 3000:3000
+        restart: unless-stopped
+        networks:
+            - sparkhire_challenge
+
 networks:
     sparkhire_challenge:
         driver: bridge
