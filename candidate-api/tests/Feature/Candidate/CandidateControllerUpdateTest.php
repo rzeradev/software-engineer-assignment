@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Candidate;
 
 use Tests\Feature\Candidate\CandidateControllerBaseTestCase;
 use App\Models\Candidate;
