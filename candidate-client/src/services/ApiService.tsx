@@ -39,9 +39,6 @@ class ApiService {
 
     private handleError(error: AxiosError) {
         if (!error.response) {
-            console.error(
-                "Network error: Please check your internet connection.",
-            );
             toast.error(
                 "Network error: Please check your internet connection.",
             );
@@ -50,34 +47,21 @@ class ApiService {
         if (error.response) {
             switch (error.response.status) {
                 case 400:
-                    console.error("Bad Request: The request is invalid.");
                     toast.error("Bad Request: The request is invalid.");
                     break;
                 case 401:
-                    console.error("Unauthorized: Please log in again.");
-                    localStorage.removeItem("user");
-                    window.location.href = "/login";
                     break;
                 case 403:
-                    console.error(
-                        "Forbidden: You do not have permission to access this resource.",
-                    );
                     toast.error(
                         "Forbidden: You do not have permission to access this resource.",
                     );
                     break;
                 case 404:
-                    console.error(
-                        "Not Found: The requested resource could not be found.",
-                    );
                     toast.error(
                         "Not Found: The requested resource could not be found.",
                     );
                     break;
                 case 422:
-                    console.error(
-                        "Unprocessable Entity: The request is invalid.",
-                    );
                     toast.error(
                         "Unprocessable Entity: The request is invalid.",
                     );
@@ -87,15 +71,11 @@ class ApiService {
                         const reader = new FileReader();
                         reader.onload = function () {
                             const data = JSON.parse(reader.result as string);
-                            console.error("An error occurred: " + data.message);
+
                             toast.error("An error occurred: " + data.message);
                         };
                         reader.readAsText(error.response.data);
                     } else {
-                        console.error(
-                            "An error occurred: " +
-                                (error.response.data as any).message,
-                        );
                         toast.error(
                             "An error occurred: " +
                                 (error.response.data as any).message,

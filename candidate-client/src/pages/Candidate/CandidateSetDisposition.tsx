@@ -112,8 +112,6 @@ export function CandidateDisposition() {
         reset({ disposition: "hired", hire_type: "internal" });
     }
 
-    console.log(errors, disposition, hire_type, fee, rejected_reason);
-
     const getCandidate = async () => {
         try {
             if (!id) {
@@ -146,7 +144,6 @@ export function CandidateDisposition() {
     }, []);
 
     const handleUpdateDisposition = async (data: DispositionSchema) => {
-        console.log(data);
         try {
             if (!id) {
                 return;
