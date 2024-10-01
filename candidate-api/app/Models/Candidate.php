@@ -26,4 +26,24 @@ class Candidate extends Model
     {
         return $this->hasOne(Disposition::class);
     }
+
+    public function scopeOrderByRelation(Builder $query, $sort, $order = 'asc')
+    {
+        $sortMappings = [
+            'candidate'            => 'candidates.name',
+            'candidate_created'    => 'candidates.created_at',
+            'disposition'          => 'disposition.disposition',
+            'hire_type'            => 'disposition.hire_type',
+            'disposition_created'  => 'disposition.created_at',
+        ];
+
+        $sort = $sortMappings[$sort] ?? 'candidates.name';
+
+        if (in_array($sort, ['disposition.disposition', 'disposition.hire_type', 'disposition.created_at'])) {
+            return $query->leftJoin('dispositions as disposition', 'candidates.id', '=', 'disposition.candidate_id')
+                ->orderBy($sort, $order);
+        }
+
+        return $query->orderBy($sort, $order);
+    }
 }

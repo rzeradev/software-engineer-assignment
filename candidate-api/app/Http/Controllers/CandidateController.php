@@ -2,37 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\Candidate\CandidateCreateDto;
+use App\Dto\Candidate\CandidateUpdateDto;
+use App\Dto\Candidate\DispositionUpdateDto;
+use App\Http\Requests\Candidate\CreateCandidateRequest;
+use App\Http\Requests\Candidate\UpdateCandidateRequest;
+use App\Http\Requests\Candidate\UpdateDispositionRequest;
+use App\Http\Resources\Candidate\CandidateCollection;
+use App\Http\Resources\Candidate\CandidateResource;
+use App\Http\Resources\Candidate\DispositionResource;
+use App\Models\Candidate;
+use App\Services\CandidateService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
-    public function index()
+
+    public function __construct(private CandidateService $candidatesService)
     {
-        return response()->json(['message' => 'index']);
+        $this->candidatesService = $candidatesService;
     }
 
-    public function store()
+    public function index(Request $request): CandidateCollection
     {
-        return response()->json(['message' => 'store']);
+        $filters = $request->all();
+        return new CandidateCollection($this->candidatesService->all($filters));
     }
 
-    public function show($candidate)
+    public function store(CreateCandidateRequest $request): CandidateResource
     {
-        return response()->json(['message' => 'show']);
+        return CandidateResource::make(
+            $this->candidatesService->create(
+                CandidateCreateDto::fromRequest($request->validated())
+            )
+        );
     }
 
-    public function update($candidate)
+    public function show(Candidate $candidate): CandidateResource
     {
-        return response()->json(['message' => 'update']);
+        return CandidateResource::make($candidate);
     }
 
-    public function destroy($candidate)
+    public function update(UpdateCandidateRequest $request, Candidate $candidate): CandidateResource
     {
-        return response()->json(['message' => 'destroy']);
+        return CandidateResource::make(
+            $this->candidatesService->update(
+                $candidate,
+                CandidateUpdateDto::fromRequest($request->validated())
+            )
+        );
     }
 
-    public function updateDisposition($candidate)
+    public function destroy(Candidate $candidate): JsonResponse
     {
-        return response()->json(['message' => 'updateDisposition']);
+        $this->candidatesService->delete($candidate);
+        return response()->json(null, 204);
+    }
+
+    public function updateDisposition(UpdateDispositionRequest $request, Candidate $candidate): DispositionResource
+    {
+        return DispositionResource::make(
+            $this->candidatesService->updateDisposition(
+                $candidate,
+                DispositionUpdateDto::fromRequest($request->validated())
+            )
+        );
     }
 }
