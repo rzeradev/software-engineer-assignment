@@ -41,6 +41,8 @@ in the root directory of the project you will find a file run.sh, you can run th
 
 You might need to give the file permission to execute, you can do that by running the following command in the root directory of the project.
 
+_If you are on linux:_
+
 ```bash
 chmod +x run.sh
 ```
@@ -54,6 +56,8 @@ Contents of the run.sh file
 cp candidate-api/.env.example candidate-api/.env
 
 # Start the containers
+export UID=$(id -u)
+export GID=$(id -g)
 docker compose up -d --build
 
 # Run migrations and install dependencies
@@ -65,6 +69,42 @@ docker compose exec app php artisan test
 ```
 
 After running the run.sh file, you can access the application on `http://localhost:3000`
+api will be available on `http://localhost:8080`
+
+After you are done with the application, you can stop the containers by running the following command in the root directory of the project.
+
+```bash
+docker compose down
+```
+
+_If you are on mac:_
+
+```bash
+chmod +x run_darwin.sh
+```
+
+Contents of the run_darwin.sh file
+
+```bash
+#!/bin/bash
+#!/bin/bash
+# Copy candidate-api/.env.example to candidate-api/.env
+cp candidate-api/.env.example candidate-api/.env
+
+# Start the containers
+export UID=1000
+export GID=1000
+docker compose up -d --build
+
+# Run migrations and install dependencies
+docker compose exec app composer install
+docker compose exec app php artisan migrate
+
+# Run laravel tests
+docker compose exec app php artisan test
+```
+
+After running the run_darwin.sh file, you can access the application on `http://localhost:3000`
 api will be available on `http://localhost:8080`
 
 After you are done with the application, you can stop the containers by running the following command in the root directory of the project.
