@@ -5,6 +5,10 @@ services:
         build:
             context: ./candidate-api
             dockerfile: Dockerfile
+            args:
+                UID: "${UID}"
+                GID: "${GID}"
+        user: "${UID}:${GID}"
         container_name: candidate_api
         tty: true
         restart: unless-stopped

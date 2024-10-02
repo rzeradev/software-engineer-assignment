@@ -2,6 +2,8 @@
 cp candidate-api/.env.example candidate-api/.env
 
 # Start the containers
+export UID=$(id -u)
+export GID=$(id -g)
 docker compose up -d --build
 
 # Run migrations and install dependencies
